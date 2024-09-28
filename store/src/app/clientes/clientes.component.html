@@ -1,0 +1,36 @@
+ <div class="col-xl-12">
+    <app-card cardTitle="Lista de clientes" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <h5 class="mb-3">
+          <a href="nuevocliente" class="btn btn-outline-dark">Nuevo Cliente</a>
+        </h5>
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Telefono</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(cliente of listaClientes; track $index){
+            <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{ cliente.nombre}}</td>
+                <td>{{ cliente.apellido}}</td>
+                <td>{{ cliente.email}}</td>
+                <td>{{ cliente.telefono}}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['/editarcliente/',cliente.cliente_id]">Editar</button>
+                    <button (click)="eliminar(cliente.cliente_id)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>

@@ -1,0 +1,67 @@
+<div class="card my-5">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <h3 class="mb-0">
+          {{ titulo }}
+        </h3>
+      </div>
+      <form [formGroup]="frm_Compra" (ngSubmit)="grabar()">
+        <div class="row">
+  
+          <div *ngIf="!editar" class="form-group mb-3">
+            <label class="form-label" for="idClientes">Cliente</label>
+            <select formControlName="idClientes" class="form-control" id="idClientes">
+              @for (cliente of listaClientes; track $index) {
+                <option [value]="cliente.cliente_id">
+                  {{ cliente.nombre + ' ' + cliente.apellido }}
+                </option>
+              }
+            </select>
+          </div>
+  
+          <div *ngIf="!editar" class="form-group mb-3">
+            <label class="form-label" for="idProductos">Producto</label>
+            <select formControlName="idProductos" class="form-control" id="idProductos">
+              @for (producto of listaProductos; track $index) {
+                <option [value]="producto.producto_id">
+                  {{ producto.nombre + '||' + producto.talla + '||' + producto.color }}
+                </option>
+              }
+            </select>
+          </div>
+  
+          <div *ngIf="!editar" class="form-group mb-3">
+            <label class="form-label" for="Cantidad">Cantidad</label>
+            <input type="number" formControlName="Cantidad" class="form-control" id="Cantidad" placeholder="Ingrese la cantidad" />
+            <div *ngIf="frm_Compra.get('Cantidad').invalid && frm_Compra.get('Cantidad').touched">
+              <small *ngIf="frm_Compra.get('Cantidad').hasError('required')" style="color: red">La cantidad es requerida</small>
+            </div>
+          </div>
+  
+          <div *ngIf="!editar" class="form-group mb-3">
+            <label class="form-label" for="Total">Total</label>
+            <input
+              type="number"
+              formControlName="Total"
+              class="form-control"
+              id="Total"
+              placeholder="Ingrese el valor de total de compra"
+            />
+            <div *ngIf="frm_Compra.get('Total').invalid && frm_Compra.get('Total').touched">
+              <small *ngIf="frm_Compra.get('Total').hasError('required')" style="color: red">El valor de compra es requerido</small>
+            </div>
+          </div>
+  
+          <div *ngIf="!editar" class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary" [disabled]="frm_Compra.invalid">Grabar</button>
+          </div>
+
+          <div *ngIf="editar" class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary">Grabar</button>
+          </div>
+
+          
+        </div>
+      </form>
+    </div>
+  </div>
